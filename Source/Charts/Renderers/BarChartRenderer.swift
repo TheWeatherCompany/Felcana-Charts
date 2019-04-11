@@ -356,7 +356,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         }
         else
         {
-			// Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
+            // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
             let fillColor = dataSet.color(atIndex: index).cgColor
             context.setFillColor(fillColor)
             /// Round only Last stacked bar

@@ -34,8 +34,8 @@ public protocol BarChartDataSetProtocol: BarLineScatterCandleBubbleChartDataSetP
     /// the color drawing borders around the bars.
     var barBorderColor: NSUIColor { get set }
 
-	/// bar corner radius
-	var barCornerRadius: CGSize { get set }
+    /// bar corner radius
+    var barCornerRadius: CGSize { get set }
 
     /// the option rounding bar corners
     var barRoundingCorners: UIRectCorner { get set }
