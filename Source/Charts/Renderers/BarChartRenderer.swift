@@ -391,14 +391,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         }
 
         /// Round only Last stacked bar
-		if ((index + 1) % dataSet.stackSize) == 0 {
-			let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
-			context.addPath(bezierPath.cgPath)
-		}
-		else {
+        if ((index + 1) % dataSet.stackSize) == 0 {
+            let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
+            context.addPath(bezierPath.cgPath)
+        }
+        else {
             let path = CGPath(rect: barRect, transform: nil)
             context.addPath(path)
-		}
+        }
         context.clip()
         context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
     }
