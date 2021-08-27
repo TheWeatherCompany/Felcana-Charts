@@ -408,18 +408,26 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         
         if let gradientColor = dataSet.barGradientColor(at: index)
         {
-            drawGradient(context: context, barRect: barRect, gradientColors: gradientColor, orientation: dataSet.barGradientOrientation)
+            drawGradient(context: context, barRect: barRect, gradientColors: gradientColor, orientation: dataSet.barGradientOrientation, dataSet: dataSet, index: index)
         }
         else
         {
             // Set the color for the currently drawn value. If the index is out of bounds, reuse colors.
             let fillColor = dataSet.color(atIndex: index).cgColor
             context.setFillColor(fillColor)
-            context.fill(barRect)
+            /// Round only Last stacked bar
+            if ((index + 1) % dataSet.stackSize) == 0 {
+                let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
+                context.addPath(bezierPath.cgPath)
+                context.fillPath()
+            }
+            else {
+                context.fill(barRect)
+            }
         }
     }
     
-    open func drawGradient(context: CGContext, barRect: CGRect, gradientColors: Array<NSUIColor>, orientation: BarGradientOrientation)
+    open func drawGradient(context: CGContext, barRect: CGRect, gradientColors: Array<NSUIColor>, orientation: BarGradientOrientation, dataSet: BarChartDataSetProtocol, index: Int)
     {
         let cgColors = gradientColors.map{ $0.cgColor } as CFArray
         let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil)
@@ -438,9 +446,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             endPoint = CGPoint(x: barRect.maxX, y: barRect.midY)
         }
         
-        let path = CGPath(rect: barRect, transform: nil)
-        
-        context.addPath(path)
+        /// Round only Last stacked bar
+        if ((index + 1) % dataSet.stackSize) == 0 {
+            let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
+            context.addPath(bezierPath.cgPath)
+        }
+        else {
+            let path = CGPath(rect: barRect, transform: nil)
+            context.addPath(path)
+        }
         context.clip()
         context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
     }
