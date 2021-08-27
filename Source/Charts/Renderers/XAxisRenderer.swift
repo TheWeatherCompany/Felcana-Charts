@@ -278,7 +278,9 @@ open class XAxisRenderer: NSObject, AxisRenderer
 
             guard viewPortHandler.isInBoundsX(position.x) else { continue }
             
-            let label = axis.valueFormatter?.stringForValue(axis.entries[i], axis: axis) ?? ""
+            /// CUSTOM CHANGE
+            let label = axis.customLabels[i]
+            /// CUSTOM CHANGE
             let labelns = label as NSString
             
             if axis.isAvoidFirstLastClippingEnabled
