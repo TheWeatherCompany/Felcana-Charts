@@ -879,7 +879,8 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
         let doesContainMultipleDataSets = dataSetCount > 1
 
-        element.accessibilityLabel = "\(label): \(elementValueText)"
+        element.accessibilityLabel = "\(e.x) \(e.y)"
+            //"\(label): \(elementValueText)"
 
         modifier(element)
 
