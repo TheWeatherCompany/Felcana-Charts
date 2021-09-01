@@ -30,6 +30,9 @@ open class AxisBase: ComponentBase
     ///CUSTOM
     @objc open var showCustomLabels = false
     @objc open var customLabels: [String] = []
+    //for accessibility label
+    @objc open var accessibilityCustomLabels: [String] = []
+    
     ///CUSTOM
     
     @objc open var axisLineColor = NSUIColor.gray

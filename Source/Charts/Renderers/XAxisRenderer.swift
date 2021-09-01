@@ -280,6 +280,8 @@ open class XAxisRenderer: NSObject, AxisRenderer
             
             /// CUSTOM CHANGE
             let label = axis.customLabels[i]
+            let accessibilityLabel = axis.accessibilityCustomLabels[i]
+            
             /// CUSTOM CHANGE
             let labelns = label as NSString
             
