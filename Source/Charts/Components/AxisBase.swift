@@ -161,6 +161,18 @@ open class AxisBase: ComponentBase
         return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
     }
     
+    
+    @objc open func getFormattedLabelForAccessibility(_ index: Int) -> String
+    {
+        guard entries.indices.contains(index) else { return "" }
+        
+        if showCustomLabels {
+            return accessibilityCustomLabels[index]
+        }
+        
+        return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
+    }
+    
     /// Sets the formatter to be used for formatting the axis labels.
     /// If no formatter is set, the chart will automatically determine a reasonable formatting (concerning decimals) for all the values that are drawn inside the chart.
     /// Use `nil` to use the formatter calculated by the chart.
