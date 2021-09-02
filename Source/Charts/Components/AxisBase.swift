@@ -31,7 +31,7 @@ open class AxisBase: ComponentBase
     @objc open var showCustomLabels = false
     @objc open var customLabels: [String] = []
     //for accessibility label
-    @objc open var accessibilityCustomLabels: [String] = []
+    open var accessibilityCustomLabels: [(String, String)] = []
     
     ///CUSTOM
     
@@ -156,18 +156,6 @@ open class AxisBase: ComponentBase
         
         if showCustomLabels {
             return customLabels[index]
-        }
-        
-        return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""
-    }
-    
-    
-    @objc open func getFormattedLabelForAccessibility(_ index: Int) -> String
-    {
-        guard entries.indices.contains(index) else { return "" }
-        
-        if showCustomLabels {
-            return accessibilityCustomLabels[index]
         }
         
         return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""

@@ -879,7 +879,8 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
         let doesContainMultipleDataSets = dataSetCount > 1
 
-        element.accessibilityLabel = "\(xAxis.accessibilityCustomLabels[idx].replacingOccurrences(of: "a", with: "am").replacingOccurrences(of: "p", with: "pm")) \(e.y)precip rate"
+        let voiceOverTuple = xAxis.accessibilityCustomLabels[idx]
+        element.accessibilityLabel = "\(voiceOverTuple.0) \(voiceOverTuple.1)"
             //"\(label): \(elementValueText)"
 
         modifier(element)
