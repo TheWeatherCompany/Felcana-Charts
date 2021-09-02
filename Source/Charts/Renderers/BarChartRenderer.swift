@@ -876,7 +876,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             }
         }
 
-        if xAxis.accessibilityCustomLabels.count > idx, idx <= 0 {
+        if xAxis.accessibilityCustomLabels.count > idx, 0 <= idx {
             let voiceOverLabel = xAxis.accessibilityCustomLabels[idx]
             element.accessibilityLabel = "\(voiceOverLabel.0) \(voiceOverLabel.1) \(voiceOverLabel.2)"
         }
