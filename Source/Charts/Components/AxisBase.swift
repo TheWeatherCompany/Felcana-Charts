@@ -31,7 +31,7 @@ open class AxisBase: ComponentBase
     @objc open var showCustomLabels = false
     @objc open var customLabels: [String] = []
     //for accessibility label
-    open var accessibilityCustomLabels: [(String, String)] = []
+    open var accessibilityCustomLabels: [(String, String, String)] = []
     
     ///CUSTOM
     
