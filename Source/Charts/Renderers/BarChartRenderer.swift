@@ -876,13 +876,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             }
         }
 
-        let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
-        let doesContainMultipleDataSets = dataSetCount > 1
-
-        element.accessibilityLabel = "\(doesContainMultipleDataSets ? (dataSet.label ?? "")  + ", " : "") \(label): \(elementValueText)"
-
+        if xAxis.accessibilityCustomLabels.count > idx, 0 <= idx {
+            let voiceOverLabel = xAxis.accessibilityCustomLabels[idx]
+            element.accessibilityLabel = "\(voiceOverLabel.0) \(voiceOverLabel.1) \(voiceOverLabel.2)"
+        }
         modifier(element)
-
         return element
+        
     }
 }
