@@ -63,7 +63,7 @@ internal struct AccessibleHeader {
     {
 
         let element = NSUIAccessibilityElement(accessibilityContainer: chart)
-        element.accessibilityLabel = "Precip data for next 7hours"
+        element.accessibilityLabel = "Bar chart for Precip Instensity"
         element.accessibilityFrame = chart.bounds
         element.isHeader = true
         
