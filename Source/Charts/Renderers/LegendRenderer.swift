@@ -479,12 +479,19 @@ open class LegendRenderer: NSObject, Renderer
         x: CGFloat,
         y: CGFloat,
         entry: LegendEntry,
-        legend: Legend)
+        legend: Legend,
+        gradientColors: Array<NSUIColor>)
     {
         guard
             let formColor = entry.formColor,
             formColor != NSUIColor.clear
             else { return }
+        
+        let cgColors = gradientColors.map{ $0.cgColor } as CFArray
+        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil)
+        
+        let startPoint: CGPoint
+        let endPoint: CGPoint
         
         var form = entry.form
         if form == .default
@@ -512,7 +519,7 @@ open class LegendRenderer: NSObject, Renderer
             
             context.setFillColor(formColor.cgColor)
             context.fillEllipse(in: CGRect(x: x, y: y - formSize / 2.0, width: formSize, height: formSize))
-            
+            context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
         case .square:
             
             context.setFillColor(formColor.cgColor)
