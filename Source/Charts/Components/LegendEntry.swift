@@ -70,4 +70,7 @@ open class LegendEntry: NSObject
     
     /// The color for drawing the form
     @objc open var formColor: NSUIColor?
+    
+    /// array of gradient colors [[color1, color2], [color3, color4]]
+    @objc open var gradientColors: [[NSUIColor]]?
 }
