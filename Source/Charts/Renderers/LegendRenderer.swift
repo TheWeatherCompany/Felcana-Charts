@@ -493,7 +493,9 @@ open class LegendRenderer: NSObject, Renderer
             else { return }
         
         let cgColors = gradientColors.map{ $0.first?.cgColor } as CFArray
-        let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil)
+        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil) else {
+            return
+        }
         
         let startPoint: CGPoint = CGPoint()
         let endPoint: CGPoint = CGPoint()
@@ -524,7 +526,7 @@ open class LegendRenderer: NSObject, Renderer
             
             //context.setFillColor(formColor.cgColor)
             context.fillEllipse(in: CGRect(x: x, y: y - formSize / 2.0, width: formSize, height: formSize))
-            context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
+            context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
             
         case .square:
             
