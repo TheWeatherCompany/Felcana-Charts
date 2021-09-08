@@ -512,7 +512,7 @@ open class LegendRenderer: NSObject, Renderer
         case .circle:
             
             context.setFillColor(formColor.cgColor)
-            context.fillEllipse(in: CGRect(x: x, y: (y - formSize / 2.0) - legendTextYOffset,
+            context.fillEllipse(in: CGRect(x: x, y: (y - formSize / 2.0) + legendTextYOffset,
                                            width: formSize, height: formSize))
             
         case .square:
@@ -550,7 +550,7 @@ open class LegendRenderer: NSObject, Renderer
     /// Draws the provided label at the given position.
     @objc open func drawLabel(context: CGContext, x: CGFloat, y: CGFloat, label: String, font: NSUIFont, textColor: NSUIColor)
     {
-        context.drawText(label, at: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor])
+        context.drawText(label, at: CGPoint(x: x, y: y + legendTextYOffset), align: .left, attributes: [.font: font, .foregroundColor: textColor])
     }
     
     @objc open func setLegendTextYOffset(with offsetValue: CGFloat) {
