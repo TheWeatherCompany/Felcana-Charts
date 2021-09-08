@@ -19,6 +19,7 @@ open class LegendRenderer: NSObject, Renderer
 
     /// the legend object this renderer renders
     @objc open var legend: Legend?
+    @objc open var legendTextYOffset = 0.0
 
     @objc public init(viewPortHandler: ViewPortHandler, legend: Legend?)
     {
@@ -550,4 +551,9 @@ open class LegendRenderer: NSObject, Renderer
     {
         context.drawText(label, at: CGPoint(x: x, y: y), align: .left, attributes: [.font: font, .foregroundColor: textColor])
     }
+    
+    @objc open func setLegendTextYOffset(with offsetValue: Double) {
+        legendTextYOffset = offsetValue
+    }
+    
 }
