@@ -19,12 +19,15 @@ open class LegendRenderer: NSObject, Renderer
 
     /// the legend object this renderer renders
     @objc open var legend: Legend?
-
-    @objc public init(viewPortHandler: ViewPortHandler, legend: Legend?)
+    
+    /// array of gradient colors [[color1, color2], [color3, color4]]
+    @objc open var legendGradientColors: [[NSUIColor]]
+    
+    @objc public init(viewPortHandler: ViewPortHandler, legend: Legend?, legendGradientColors: [[NSUIColor]])
     {
         self.viewPortHandler = viewPortHandler
         self.legend = legend
-
+        self.legendGradientColors = legendGradientColors
         super.init()
     }
 
@@ -332,7 +335,8 @@ open class LegendRenderer: NSObject, Renderer
                         x: posX,
                         y: posY + formYOffset,
                         entry: e,
-                        legend: legend)
+                        legend: legend,
+                        gradientColors: legendGradientColors)
                     
                     if direction == .leftToRight
                     {
@@ -424,7 +428,8 @@ open class LegendRenderer: NSObject, Renderer
                         x: posX,
                         y: posY + formYOffset,
                         entry: e,
-                        legend: legend)
+                        legend: legend,
+                        gradientColors: legendGradientColors)
                     
                     if direction == .leftToRight
                     {
@@ -480,18 +485,18 @@ open class LegendRenderer: NSObject, Renderer
         y: CGFloat,
         entry: LegendEntry,
         legend: Legend,
-        gradientColors: Array<NSUIColor>)
+        gradientColors: [[NSUIColor]])
     {
         guard
             let formColor = entry.formColor,
             formColor != NSUIColor.clear
             else { return }
         
-        let cgColors = gradientColors.map{ $0.cgColor } as CFArray
+        let cgColors = gradientColors.map{ $0.first?.cgColor } as CFArray
         let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil)
         
-        let startPoint: CGPoint
-        let endPoint: CGPoint
+        let startPoint: CGPoint = CGPoint()
+        let endPoint: CGPoint = CGPoint()
         
         var form = entry.form
         if form == .default
@@ -517,9 +522,10 @@ open class LegendRenderer: NSObject, Renderer
         case .default: fallthrough
         case .circle:
             
-            context.setFillColor(formColor.cgColor)
+            //context.setFillColor(formColor.cgColor)
             context.fillEllipse(in: CGRect(x: x, y: y - formSize / 2.0, width: formSize, height: formSize))
             context.drawLinearGradient(gradient!, start: startPoint, end: endPoint, options: [])
+            
         case .square:
             
             context.setFillColor(formColor.cgColor)
