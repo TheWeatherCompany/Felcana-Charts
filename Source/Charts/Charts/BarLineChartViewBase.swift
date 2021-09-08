@@ -235,7 +235,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             context.clip(to: viewPortHandler.contentRect)
         }
 
-        renderer.drawData(context: context)
+        // renderer.drawData(context: context)
         
         // The renderers are responsible for clipping, to account for line-width center etc.
         if !xAxis.drawGridLinesBehindDataEnabled
@@ -251,7 +251,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             renderer.drawHighlighted(context: context, indices: highlighted)
         }
         
-        /* context.restoreGState()
+        context.restoreGState()
         
         renderer.drawExtras(context: context)
         
@@ -269,12 +269,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         {
             rightYAxisRenderer.renderLimitLines(context: context)
         }
-        */
         
-        context.restoreGState()
-        
-        renderer.drawExtras(context: context)
-
         xAxisRenderer.renderAxisLabels(context: context)
         leftYAxisRenderer.renderAxisLabels(context: context)
         rightYAxisRenderer.renderAxisLabels(context: context)
@@ -294,26 +289,12 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
 
         legendRenderer.renderLegend(context: context)
+        
+        renderer.drawData(context: context)
 
         drawDescription(in: context)
         
         drawMarkers(context: context)
-        
-        
-        if xAxis.isEnabled && !xAxis.isDrawLimitLinesBehindDataEnabled
-        {
-            xAxisRenderer.renderLimitLines(context: context)
-        }
-        
-        if leftAxis.isEnabled && !leftAxis.isDrawLimitLinesBehindDataEnabled
-        {
-            leftYAxisRenderer.renderLimitLines(context: context)
-        }
-        
-        if rightAxis.isEnabled && !rightAxis.isDrawLimitLinesBehindDataEnabled
-        {
-            rightYAxisRenderer.renderLimitLines(context: context)
-        }
     }
     
     private var _autoScaleLastLowestVisibleX: Double?
