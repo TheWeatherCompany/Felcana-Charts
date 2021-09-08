@@ -100,7 +100,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     @objc open var noDataTextAlignment: TextAlignment = .left
 
     /// The renderer object responsible for rendering / drawing the Legend.
-    @objc open lazy var legendRenderer = LegendRenderer(viewPortHandler: viewPortHandler, legend: legend, legendGradientColors: [[NSUIColor]])
+    @objc open lazy var legendRenderer = LegendRenderer(viewPortHandler: viewPortHandler, legend: legend, legendGradientColors: [[NSUIColor]]())
 
     /// object responsible for rendering the data
     @objc open var renderer: DataRenderer?
