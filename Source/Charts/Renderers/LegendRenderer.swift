@@ -336,7 +336,7 @@ open class LegendRenderer: NSObject, Renderer
                         y: posY + formYOffset,
                         entry: e,
                         legend: legend,
-                        gradientColors: legendGradientColors)
+                        gradientColors: e.gradientColors ?? [UIColor]())
                     
                     if direction == .leftToRight
                     {
@@ -429,7 +429,7 @@ open class LegendRenderer: NSObject, Renderer
                         y: posY + formYOffset,
                         entry: e,
                         legend: legend,
-                        gradientColors: legendGradientColors)
+                        gradientColors: e.gradientColors ?? [UIColor]())
                     
                     if direction == .leftToRight
                     {
@@ -485,14 +485,14 @@ open class LegendRenderer: NSObject, Renderer
         y: CGFloat,
         entry: LegendEntry,
         legend: Legend,
-        gradientColors: [[NSUIColor]])
+        gradientColors: [NSUIColor])
     {
         guard
             let formColor = entry.formColor,
             formColor != NSUIColor.clear
             else { return }
         
-        let cgColors = gradientColors.map{ $0.first?.cgColor } as CFArray
+        let cgColors = gradientColors.map{ $0.cgColor } as CFArray
         guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: cgColors, locations: nil) else {
             return
         }

@@ -72,5 +72,5 @@ open class LegendEntry: NSObject
     @objc open var formColor: NSUIColor?
     
     /// array of gradient colors [[color1, color2], [color3, color4]]
-    @objc open var gradientColors: [[NSUIColor]]?
+    @objc open var gradientColors: [NSUIColor]?
 }
