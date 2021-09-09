@@ -336,7 +336,7 @@ open class LegendRenderer: NSObject, Renderer
                         y: posY + formYOffset,
                         entry: e,
                         legend: legend,
-                        gradientColors: e.gradientColors ?? [UIColor]())
+                        gradientColors: e.gradientColors ?? [NSUIColor]())
                     
                     if direction == .leftToRight
                     {
@@ -429,7 +429,7 @@ open class LegendRenderer: NSObject, Renderer
                         y: posY + formYOffset,
                         entry: e,
                         legend: legend,
-                        gradientColors: e.gradientColors ?? [UIColor]())
+                        gradientColors: e.gradientColors ?? [NSUIColor]())
                     
                     if direction == .leftToRight
                     {
