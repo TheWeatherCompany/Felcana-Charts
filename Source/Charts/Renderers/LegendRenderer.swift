@@ -348,7 +348,7 @@ open class LegendRenderer: NSObject, Renderer
                         posX += direction == .rightToLeft ? -formToTextSpace : formToTextSpace
                     }
                     
-                    if direction == .rightToLeft, i < calculatedLineSizes.endIndex
+                    if direction == .rightToLeft, i < calculatedLineSizes.count - 1
                     {
                         posX -= calculatedLabelSizes[i].width
                     }
@@ -361,7 +361,7 @@ open class LegendRenderer: NSObject, Renderer
                         font: labelFont,
                         textColor: e.labelColor ?? labelTextColor)
                     
-                    if direction == .leftToRight, i < calculatedLineSizes.endIndex
+                    if direction == .leftToRight, i < calculatedLineSizes.count - 1
                     {
                         posX += calculatedLabelSizes[i].width
                     }
