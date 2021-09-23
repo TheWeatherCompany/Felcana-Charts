@@ -421,9 +421,14 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 if let cornerRadius = dataSet.barCornerRadius {
                     bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
                 } else {
+                    guard barRect.size.height > 0 else { return }
                     /// For variable bar width we keep the height at least the width value so we can round it, the origin will draw it at the right height
                     let width = barRect.size.width
-                    let height = max(width, barRect.size.height)
+                    var height = max(width, barRect.size.height)
+                    
+                    if barRect.size.height <= 0 {
+                        height = 0
+                    }
                     let newBarRect = CGRect(origin: barRect.origin, size: CGSize(width: width, height: height))
                     let cornerRadius = CGSize(width: newBarRect.size.width/2, height: newBarRect.size.height/2)
                     bezierPath = UIBezierPath(roundedRect: newBarRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
@@ -466,7 +471,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             } else {
                 /// For variable bar width we keep the height at least the width value so we can round it, the origin will draw it at the right height
                 let width = barRect.size.width
-                let height = max(width, barRect.size.height)
+                var height = max(width, barRect.size.height)
+                
+                if barRect.size.height <= 0 {
+                    height = 0
+                }
+                
                 let newBarRect = CGRect(origin: barRect.origin, size: CGSize(width: width, height: height))
                 let cornerRadius = CGSize(width: newBarRect.size.width/2, height: newBarRect.size.height/2)
                 bezierPath = UIBezierPath(roundedRect: newBarRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
