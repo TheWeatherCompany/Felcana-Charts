@@ -417,7 +417,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             context.setFillColor(fillColor)
             /// Round only Last stacked bar
             if ((index + 1) % dataSet.stackSize) == 0 {
-                let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
+                var bezierPath = UIBezierPath()
+                if let cornerRadius = dataSet.barCornerRadius {
+                    bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
+                } else {
+                    /// For variable bar width we keep the height at least the width value so we can round it, the origin will draw it at the right height
+                    let width = barRect.size.width
+                    let height = max(width, barRect.size.height)
+                    let newBarRect = CGRect(origin: barRect.origin, size: CGSize(width: width, height: height))
+                    let cornerRadius = CGSize(width: newBarRect.size.width/2, height: newBarRect.size.height/2)
+                    bezierPath = UIBezierPath(roundedRect: newBarRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
+                }
+                
                 context.addPath(bezierPath.cgPath)
                 context.fillPath()
             }
@@ -448,7 +459,18 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         
         /// Round only Last stacked bar
         if ((index + 1) % dataSet.stackSize) == 0 {
-            let bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: dataSet.barCornerRadius)
+
+            var bezierPath = UIBezierPath()
+            if let cornerRadius = dataSet.barCornerRadius {
+                bezierPath = UIBezierPath(roundedRect: barRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
+            } else {
+                /// For variable bar width we keep the height at least the width value so we can round it, the origin will draw it at the right height
+                let width = barRect.size.width
+                let height = max(width, barRect.size.height)
+                let newBarRect = CGRect(origin: barRect.origin, size: CGSize(width: width, height: height))
+                let cornerRadius = CGSize(width: newBarRect.size.width/2, height: newBarRect.size.height/2)
+                bezierPath = UIBezierPath(roundedRect: newBarRect, byRoundingCorners: dataSet.barRoundingCorners, cornerRadii: cornerRadius)
+            }
             context.addPath(bezierPath.cgPath)
         }
         else {
