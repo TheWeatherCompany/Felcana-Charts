@@ -235,7 +235,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             context.clip(to: viewPortHandler.contentRect)
         }
 
-        renderer.drawData(context: context)
+        // renderer.drawData(context: context)
         
         // The renderers are responsible for clipping, to account for line-width center etc.
         if !xAxis.drawGridLinesBehindDataEnabled
@@ -289,6 +289,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
 
         legendRenderer.renderLegend(context: context)
+        
+        renderer.drawData(context: context)
 
         drawDescription(in: context)
         
