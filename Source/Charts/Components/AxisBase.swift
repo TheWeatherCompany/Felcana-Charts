@@ -12,6 +12,18 @@
 import Foundation
 import CoreGraphics
 
+@objc public enum TickType: Int
+{
+    case minor
+    case major
+    case none
+}
+
+public struct LabelsAndTicks {
+    let label: String
+    let tick: TickType
+}
+
 /// Base class for all axes
 @objc(ChartAxisBase)
 open class AxisBase: ComponentBase
@@ -28,8 +40,8 @@ open class AxisBase: ComponentBase
     @objc open var labelTextColor = NSUIColor.labelOrBlack
     
     ///CUSTOM
-    @objc open var showCustomLabels = false
-    @objc open var customLabels: [String] = []
+    open var showCustomLabels = false
+    open var customLabelsAndTicks: [LabelsAndTicks] = []
     
     //for accessibility label
     open var accessibilityCustomLabels: [(String, String, String)] = []
@@ -155,7 +167,7 @@ open class AxisBase: ComponentBase
         guard entries.indices.contains(index) else { return "" }
         
         if showCustomLabels {
-            return customLabels[index]
+            return customLabelsAndTicks[index].label
         }
         
         return valueFormatter?.stringForValue(entries[index], axis: self) ?? ""

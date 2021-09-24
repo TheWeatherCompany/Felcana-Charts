@@ -279,7 +279,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
             guard viewPortHandler.isInBoundsX(position.x) else { continue }
             
             /// CUSTOM CHANGE
-            let label = axis.customLabels[i]
+            let label = axis.customLabelsAndTicks[i].label
             /// CUSTOM CHANGE
             let labelns = label as NSString
             
@@ -305,6 +305,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
             
             drawLabel(context: context,
                       formattedLabel: label,
+                      tickType: axis.customLabelsAndTicks[i].tick,
                       x: position.x,
                       y: pos,
                       attributes: labelAttrs,
@@ -317,6 +318,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
     @objc open func drawLabel(
         context: CGContext,
         formattedLabel: String,
+        tickType: TickType,
         x: CGFloat,
         y: CGFloat,
         attributes: [NSAttributedString.Key : Any],
