@@ -20,8 +20,13 @@ import CoreGraphics
 }
 
 public struct LabelsAndTicks {
-    let label: String
-    let tick: TickType
+    public var label: String
+    public var tick: TickType
+    
+    public init(label: String, tick: TickType) {
+        self.label = label
+        self.tick = tick
+    }
 }
 
 /// Base class for all axes
