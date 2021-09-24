@@ -280,7 +280,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
             
             var label = axis.valueFormatter?.stringForValue(axis.entries[i], axis: axis) ?? ""
             /// CUSTOM CHANGE
-            if axis.customLabels.count > i {
+            if axis.customLabelsAndTicks.count > i {
                 label = axis.customLabelsAndTicks[i].label
             }/// CUSTOM CHANGE
             
