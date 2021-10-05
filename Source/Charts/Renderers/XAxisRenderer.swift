@@ -280,8 +280,8 @@ open class XAxisRenderer: NSObject, AxisRenderer
             
             var label = axis.valueFormatter?.stringForValue(axis.entries[i], axis: axis) ?? ""
             /// CUSTOM CHANGE
-            if axis.customLabels.count > i {
-                label = axis.customLabels[i]
+            if axis.customLabelsAndTicks.count > i {
+                label = axis.customLabelsAndTicks[i].label
             }/// CUSTOM CHANGE
             
             let labelns = label as NSString
@@ -307,6 +307,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
             
             drawLabel(context: context,
                       formattedLabel: label,
+                      tickType: axis.customLabelsAndTicks[i].tick,
                       x: position.x,
                       y: pos,
                       attributes: labelAttrs,
@@ -319,6 +320,7 @@ open class XAxisRenderer: NSObject, AxisRenderer
     @objc open func drawLabel(
         context: CGContext,
         formattedLabel: String,
+        tickType: TickType,
         x: CGFloat,
         y: CGFloat,
         attributes: [NSAttributedString.Key : Any],
